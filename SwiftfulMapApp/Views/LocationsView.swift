@@ -12,6 +12,9 @@ import MapKit
 struct LocationsView: View {
     
     @EnvironmentObject private var vm: LocationsViewModel
+    
+    let maxWidthForIpad: CGFloat = 700
+    
     @State private var mapRegion: MKCoordinateRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 41.8902, longitude: 12.4922),
         span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
@@ -24,6 +27,7 @@ struct LocationsView: View {
             VStack(spacing: 0) {
                 header
                     .padding()
+                    .frame(maxWidth: maxWidthForIpad)
                 Spacer()
                 locationPreviewStack
             }
@@ -90,6 +94,8 @@ extension LocationsView {
                     LocationPreviewView(location: location)
                         .shadow(color: Color.black.opacity(0.3), radius: 20)
                         .padding()
+                        .frame(maxWidth: maxWidthForIpad)
+                        .frame(maxWidth: .infinity)
                         .transition(.asymmetric(
                             insertion: .move(edge: .trailing),
                             removal: .move(edge: .leading)))
